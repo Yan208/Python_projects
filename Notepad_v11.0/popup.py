@@ -29,8 +29,8 @@ class PopupFile(BoxLayout):
     self.file = fm.FileMenu
     
   def send_self_popup(self):
-      self_popup = globals()
-      self_popup = self
+      #self_popup = globals()
+      #self_popup = self
       fm.FileMenu.receive_self_popup_in_file_menu(self, self_popup=self)
 
   def receive_self_file_menu_in_popup(self, self_file):

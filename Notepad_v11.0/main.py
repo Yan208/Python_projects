@@ -17,7 +17,9 @@ if sys.platform.startswith('win'):
     Config.set('graphics', 'height', '600')
     #Config.set('graphics', 'resizable', '0')
     Config.set('graphics', 'position', 'auto')  # Центрирование окна
-
+if sys.platform.startswith('android'):
+    Config.set('kivy', 'keyboard_mode', '')
+    
 from kivymd.app import MDApp
 
 import file_menu as fm
@@ -25,8 +27,7 @@ import mainlay as ml
 #import popup
 import foldermenu
 
-if sys.platform.startswith('android'):
-    Config.set('kivy', 'keyboard_mode', '')
+
 #import popup_create_folder as popup_create_folder
 
 print('before global')

@@ -43,19 +43,18 @@ class FileMenu(Screen):
     print("File_menu init")
     self_file = globals()
     self_file = self
-    self_popup = pf
+    #self_popup = pf
     self.app = App.get_running_app()
     self.send_self_file()
     #self.build_file_menu()
-    return
-    
+
   def send_self_file(self):
-      pf.PopupFile.receive_self_file_menu_in_popup(self, self_file)
-      
+      pf.PopupFile.receive_self_file_menu_in_popup(self, self_file=self)
+
   def receive_self_main_in_file_menu(self, self_main):
       global file_main
       file_main = self_main
-      
+
   def receive_self_popup_in_file_menu(self, self_popup):
       global file_popup
       file_popup = self_popup
@@ -130,6 +129,7 @@ class FileMenu(Screen):
     self.button_list_menu = []
     self.files_txt.sort()
     for i in range(len(self.files_txt)):
+    #for i, file_txt in enumerate(self.files_txt): - не работает эта хуйня!
       self.button_list_menu.append(i)
       self.button_list_menu[i] = meb.MultiExpressionButton(
         text = self.files_txt[i],
