@@ -64,9 +64,10 @@ class FolderMenu(Screen):
     
   # читаем список папок в subdir
   def func_folder_list(self):
-    all_list = os.listdir()
+    #all_list = os.listdir()
     self.folder_list = []
     self.dir_tek = os.getcwd()
+    print('tek dir from func_folder_list:', self.dir_tek)
     example_dir = self.dir_tek
     #'/storage/emulated/0/Documents/Pydroid3'
     with os.scandir(example_dir) as files:
@@ -78,6 +79,8 @@ class FolderMenu(Screen):
   # Как choice_file, только для folder
   def choice_folder(self, on_folder_list):
     print("choice_folder")
+    print("Пытаемся перейти в:", on_folder_list.text)
+    print("Текущий рабочий каталог:", os.getcwd())
     os.chdir(on_folder_list.text)
     self.dir_tek = os.getcwd()
     self.off_folder_list()

@@ -19,7 +19,7 @@ if sys.platform.startswith('win'):
     Config.set('graphics', 'position', 'auto')  # Центрирование окна
 if sys.platform.startswith('android'):
     Config.set('kivy', 'keyboard_mode', '')
-    
+
 from kivymd.app import MDApp
 
 import file_menu as fm
@@ -49,6 +49,22 @@ class MainApp(MDApp):
         print('MainApp init')
         self.title = 'My Notepad'
         self.sm = ScreenManager( transition=NoTransition())
+        path = "Notes"  # имя папки (в текущей директории)
+        try:
+            if not os.path.exists("Notes"):
+                os.mkdir(path)
+            print(f"Папка '{path}' создана успешно.")
+            os.chdir(path)
+        except FileExistsError:
+            print(f"Папка '{path}' уже существует.")
+            if os.path.exists("Notes"):
+                print('Notes есть в папке')
+                os.chdir(path)
+        except PermissionError:
+            print(f"Нет прав для создания папки '{path}'.")
+        except Exception as e:
+            print(f"Произошла ошибка: {e}")
+
     def build(self): #0
         '''
         Docstring для build

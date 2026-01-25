@@ -68,6 +68,9 @@ class FileMenu(Screen):
     '''
     global subdir, self_main, self_popup, grd, s_man
     print("build_file_menu begin")
+
+
+
     grd = self_file.grd
     grd = self_file.file_list_building(grd)
     self_file.grd.bind(minimum_height = self_file.grd.setter('height'))
