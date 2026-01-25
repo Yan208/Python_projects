@@ -9,6 +9,7 @@ import os
 import sys
 from kivy.config import Config
 from kivy.uix.screenmanager import ScreenManager, NoTransition
+# здесь линтер срабатывает ложно, оставить!
 from kivy.properties import StringProperty, ObjectProperty
 
 
@@ -20,8 +21,8 @@ if sys.platform.startswith('win'):
 if sys.platform.startswith('android'):
     Config.set('kivy', 'keyboard_mode', '')
 
+# здесь линтер срабатывает ложно, оставить!
 from kivymd.app import MDApp
-
 import file_menu as fm
 import mainlay as ml
 #import popup
@@ -68,7 +69,7 @@ class MainApp(MDApp):
     def build(self): #0
         '''
         Docstring для build
-        размещаем на экране список файлов и создаем другие экраны
+        размещаем на экране список файлов и создаем другие экраны.
         '''
         print('build begin')
         self.sm.add_widget(fm.FileMenu(name='menu_file'))

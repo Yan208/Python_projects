@@ -22,79 +22,80 @@ self_file = ObjectProperty(None)
 
 # Первое окно приложения.
 class FileMenu(Screen):
-  '''
-  Docstring для FileMenu.
-  Действия для вывода списка файлов.
-  '''
-  print('begin class FileMenu')
+    '''
+    Docstring для FileMenu.
+    Действия для вывода списка файлов.
+    '''
+    print('begin class FileMenu')
 
-  global self_main, subdir
-  text_for_label = StringProperty("Список заметок")
-  files_txt = ListProperty()
-  float = ObjectProperty()
-  scroll = ObjectProperty()
-  grd = ObjectProperty()
-  button_menu = ObjectProperty(None)
-  popup_box = ObjectProperty()
+    global self_main, subdir
+    text_for_label = StringProperty("Список заметок")
+    files_txt = ListProperty()
+    float = ObjectProperty()
+    scroll = ObjectProperty()
+    grd = ObjectProperty()
+    button_menu = ObjectProperty(None)
+    popup_box = ObjectProperty()
   
-  def __init__(self, **kwargs):
-    super().__init__(**kwargs)
-    global self_popup, self_main, subdir, self_file
-    print("File_menu init")
-    self_file = globals()
-    self_file = self
-    #self_popup = pf
-    self.app = App.get_running_app()
-    self.send_self_file()
-    #self.build_file_menu()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        global self_popup, self_main, subdir, self_file
+        print("File_menu init")
+        self_file = globals()
+        self_file = self
+        #self_popup = pf
+        self.app = App.get_running_app()
+        self.send_self_file()
+        #self.build_file_menu()
 
-  def send_self_file(self):
-      pf.PopupFile.receive_self_file_menu_in_popup(self, self_file=self)
+    def send_self_file(self):
+        pf.PopupFile.receive_self_file_menu_in_popup(self, self_file=self)
 
-  def receive_self_main_in_file_menu(self, self_main):
-      global file_main
-      file_main = self_main
+    def receive_self_main_in_file_menu(self, self_main):
+        global file_main
+        file_main = self_main
 
-  def receive_self_popup_in_file_menu(self, self_popup):
-      global file_popup
-      file_popup = self_popup
+    def receive_self_popup_in_file_menu(self, self_popup):
+        global file_popup
+        file_popup = self_popup
       
-  def build_file_menu(self): #1
-    '''
-    Docstring для build_file_menu
-    Первая функция приложения. 
-    Создается список файлов (заметок) и выводится на экран.
-    После её выполнения приложение ждет действия пользователя.
-    '''
-    global subdir, self_main, self_popup, grd, s_man
-    print("build_file_menu begin")
-    grd = self_file.grd
-    grd = self_file.file_list_building(grd)
-    self_file.grd.bind(minimum_height = self_file.grd.setter('height'))
-    self_file.is_popup = True
-    Clock.schedule_once(self_file.shed_label, 3)
-    print("build_file_menu end!")
+    def build_file_menu(self): #1
+        '''
+        Docstring для build_file_menu
+        Первая функция приложения. 
+        Создается список файлов (заметок) и выводится на экран.
+        После её выполнения приложение ждет действия пользователя.
+        '''
+        global subdir, self_main, self_popup, grd, s_man
+        print("build_file_menu begin")
+        grd = self_file.grd
+        grd = self_file.file_list_building(grd)
+        self_file.grd.bind(minimum_height = self_file.grd.setter('height'))
+        self_file.is_popup = True
+        Clock.schedule_once(self_file.shed_label, 3)
+        print("build_file_menu end!")
 
-  def choice_file_main(self, file_list_building):
-    '''
-    Docstring для choice_file_main
-    
-    После функции build_file_menu, приложение ожидает действия. Пользователь выбирает заметку (файл)
-    и запускается эта функция.
-    
-    :param self: self из класса FileMenu (из этого класса)
-    :param file_list_building: Описание
-    '''
-    global file_main
-    print("choice_file_main begin")
-    self.app.sm.current = 'text_area'
-    file_main.choice_file_mainlay(file_list_building)
+    def choice_file_main(self, file_list_building):
+        '''
+        Docstring для choice_file_main
+        
+        После функции build_file_menu, приложение ожидает действия.
+        Пользователь выбирает заметку (файл)
+        и запускается эта функция.
+        
+        :param self: self из класса FileMenu (из этого класса)
+        :param file_list_building: Описание
+        '''
+        global file_main
+        print("choice_file_main begin")
+        self.app.sm.current = 'text_area'
+        file_main.choice_file_mainlay(file_list_building)
 
-  def button_plus_pressed(self):
-    print("button '+' pressed")
-    self.app.sm.current = 'text_area'
-    file_main.create_file_building()
-    file_main.text_area.focus = True
+    def button_plus_pressed(self):
+        print("button '+' pressed")
+        self.app.sm.current = 'text_area'
+        file_main.create_file_building()
+        file_main.text_area.focus = True
 
 
 #  def on_text_for_label(self, *args):
@@ -103,65 +104,65 @@ class FileMenu(Screen):
 # Файловая функция
 # читаем файлы в список self.files_txt
 # вызываем из file_list_building
-  def func_file_list(self):
-    global subdir
-    subdir = os. getcwd()
-    if subdir:
-      print("subdir:", subdir)
-      os.chdir(subdir)
-    file_list = os.listdir()
-    self.files_txt = []
-    for i in file_list:
-      if ".txt" in i:
-        self.files_txt.append(i)
-    return self.files_txt
+    def func_file_list(self):
+        global subdir
+        subdir = os. getcwd()
+        if subdir:
+            print("subdir:", subdir)
+            os.chdir(subdir)
+        file_list = os.listdir()
+        self.files_txt = []
+        for i in file_list:
+            if ".txt" in i:
+                self.files_txt.append(i)
+        return self.files_txt
 
 # Включение file_list.
-  def file_list_building(self, grd): #2
-    print("file_list_building begin")
-    grd.clear_widgets()
-    #grd.padding = (10, 10, 10, 10)
-    self.grd.row_force_default = True
-    self.grd.row_default_height = 170
-    self.grd.spacing_vertical = 2
-    self.files_txt = self.func_file_list()
-    self.button_list_menu = []
-    self.files_txt.sort()
-    #for i in range(len(self.files_txt)):
-    for i, file_txt in enumerate(self.files_txt): #- только нужно поменять переменные!
-      #print(f'Обработка файла {i}:', str(file_txt))
-      self.button_list_menu.append(i)
-      self.button_list_menu[i] = meb.MultiExpressionButton(
-        #text = self.files_txt[i],
-        text = str(file_txt),
-        background_color = (0, 0, 0, 1),
-        text_size = (1000, 50),
-        halign = 'left' )
-      y_line = 50
-      with self.grd.canvas.after:
-        Color(1, 1, 1)
-        y_line += i * self.grd.row_default_height + self.grd.spacing_vertical * i * 0.6
-        Line(
-          points=[ 0, y_line, 1100, y_line ],
-          width = 1 )
-      self.button_list_menu[i].bind(on_single_press = self.choice_file_main)
-      self.button_list_menu[i].bind(on_long_press = file_popup.popup_file)
-      self.grd.add_widget(self.button_list_menu[i])
-    print('Всего файлов', len(self.files_txt))
-    return self.grd
+    def file_list_building(self, grd): #2
+        print("file_list_building begin")
+        grd.clear_widgets()
+        #grd.padding = (10, 10, 10, 10)
+        self.grd.row_force_default = True
+        self.grd.row_default_height = 170
+        self.grd.spacing_vertical = 2
+        self.files_txt = self.func_file_list()
+        self.button_list_menu = []
+        self.files_txt.sort()
+        #for i in range(len(self.files_txt)):
+        for i, file_txt in enumerate(self.files_txt): #- только нужно поменять переменные!
+            #print(f'Обработка файла {i}:', str(file_txt))
+            self.button_list_menu.append(i)
+            self.button_list_menu[i] = meb.MultiExpressionButton(
+                #text = self.files_txt[i],
+                text = str(file_txt),
+                background_color = (0, 0, 0, 1),
+                text_size = (1000, 50),
+                halign = 'left' )
+            y_line = 50
+            with self.grd.canvas.after:
+                Color(1, 1, 1)
+                y_line += i * self.grd.row_default_height + self.grd.spacing_vertical * i * 0.6
+                Line(
+                  points=[ 0, y_line, 1100, y_line ],
+                  width = 1 )
+            self.button_list_menu[i].bind(on_single_press = self.choice_file_main)
+            self.button_list_menu[i].bind(on_long_press = file_popup.popup_file)
+            self.grd.add_widget(self.button_list_menu[i])
+        print('Всего файлов', len(self.files_txt))
+        return self.grd
 
-  def shed_label(self, time):
-    print('shed_label begin. time: ', time)
-    #self.text_for_label = "Список заметок"
-    if (len(self.files_txt) == 0):
-    #and (self.back_from_ml == False):
-      self.ids.label_app.text = 'В этой папке заметок нет. Нажми +, чтобы добавить, или = для выбора папки.'
-    else:
-      self.ids.label_app.text = f'Список заметок в папке: {os.getcwd()}'
+    def shed_label(self, time):
+        print('shed_label begin. time: ', time)
+        #self.text_for_label = "Список заметок"
+        if (len(self.files_txt) == 0):
+        #and (self.back_from_ml == False):
+            self.ids.label_app.text = 'В этой папке заметок нет. Нажми +, чтобы добавить, или = для выбора папки.'
+        else:
+            self.ids.label_app.text = f'Список заметок в папке: {os.getcwd()}'
       
   # Выключение file_list с экрана
-  def off_file_list(self):
-    for i in range(len(self.files_txt)):
-      self.grd.remove_widget(self.button_list_menu[i])
-    return
-  
+    def off_file_list(self):
+        for i in range(len(self.files_txt)):
+            self.grd.remove_widget(self.button_list_menu[i])
+        return
+
