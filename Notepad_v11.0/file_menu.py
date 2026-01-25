@@ -68,9 +68,6 @@ class FileMenu(Screen):
     '''
     global subdir, self_main, self_popup, grd, s_man
     print("build_file_menu begin")
-
-
-
     grd = self_file.grd
     grd = self_file.file_list_building(grd)
     self_file.grd.bind(minimum_height = self_file.grd.setter('height'))
@@ -93,14 +90,13 @@ class FileMenu(Screen):
     self.app.sm.current = 'text_area'
     file_main.choice_file_mainlay(file_list_building)
 
-    
   def button_plus_pressed(self):
     print("button '+' pressed")
     self.app.sm.current = 'text_area'
     file_main.create_file_building()
     file_main.text_area.focus = True
 
-    
+
 #  def on_text_for_label(self, *args):
 #    print('label changed')
 
@@ -119,7 +115,7 @@ class FileMenu(Screen):
       if ".txt" in i:
         self.files_txt.append(i)
     return self.files_txt
-    
+
 # Включение file_list.
   def file_list_building(self, grd): #2
     print("file_list_building begin")
@@ -131,11 +127,13 @@ class FileMenu(Screen):
     self.files_txt = self.func_file_list()
     self.button_list_menu = []
     self.files_txt.sort()
-    for i in range(len(self.files_txt)):
-    #for i, file_txt in enumerate(self.files_txt): - не работает эта хуйня!
+    #for i in range(len(self.files_txt)):
+    for i, file_txt in enumerate(self.files_txt): #- только нужно поменять переменные!
+      #print(f'Обработка файла {i}:', str(file_txt))
       self.button_list_menu.append(i)
       self.button_list_menu[i] = meb.MultiExpressionButton(
-        text = self.files_txt[i],
+        #text = self.files_txt[i],
+        text = str(file_txt),
         background_color = (0, 0, 0, 1),
         text_size = (1000, 50),
         halign = 'left' )
@@ -159,7 +157,7 @@ class FileMenu(Screen):
     #and (self.back_from_ml == False):
       self.ids.label_app.text = 'В этой папке заметок нет. Нажми +, чтобы добавить, или = для выбора папки.'
     else:
-      self.ids.label_app.text = 'Список заметок'
+      self.ids.label_app.text = f'Список заметок в папке: {os.getcwd()}'
       
   # Выключение file_list с экрана
   def off_file_list(self):
