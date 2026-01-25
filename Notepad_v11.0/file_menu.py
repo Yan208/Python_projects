@@ -1,9 +1,14 @@
+'''
+Docstring для file_menu.
+Действия для вывода списка файлов.
+'''
+import os
 from kivy.uix.screenmanager import Screen
 from kivy.properties import (StringProperty, ObjectProperty, ListProperty)
 import popup as pf
 import multiexpressionbutton as meb
 from kivy.graphics import Color, Line
-import os
+
 from kivy.clock import Clock
 from kivy.app import App
 
@@ -55,7 +60,7 @@ class FileMenu(Screen):
       global file_popup
       file_popup = self_popup
       
-  def build_file_menu(self):
+  def build_file_menu(self): #1
     '''
     Docstring для build_file_menu
     Первая функция приложения. 
@@ -114,7 +119,7 @@ class FileMenu(Screen):
     return self.files_txt
     
 # Включение file_list.
-  def file_list_building(self, grd):
+  def file_list_building(self, grd): #2
     print("file_list_building begin")
     grd.clear_widgets()
     #grd.padding = (10, 10, 10, 10)

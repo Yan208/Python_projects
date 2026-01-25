@@ -11,6 +11,7 @@ from kivy.config import Config
 from kivy.uix.screenmanager import ScreenManager, NoTransition
 from kivy.properties import StringProperty, ObjectProperty
 
+
 if sys.platform.startswith('win'):
     Config.set('graphics', 'width', '1100')
     Config.set('graphics', 'height', '600')
