@@ -1,0 +1,275 @@
+#:kivy 2.0.0
+
+<MainLayout>:
+  float: float
+  label_app : label_app
+  text_area : text_area
+  #button_edit : button_edit
+  button_menu : button_menu
+  
+  
+  FloatLayout:
+    id: float
+
+    MDIconButton:
+    #MDRaisedButton:
+      id: button_menu
+      icon: 'keyboard-backspace'
+      #text: '<-'
+      size_hint: (.15, .09)
+      pos_hint: {"x":0, "y":0.90}
+      on_press: root.back_to_file()
+      #root.manager.current = 'menu_file'
+  
+    MDLabel:
+      id: label_app
+      text: root.text_for_label
+      halign: 'left'
+      text_size: (600, None)
+      size_hint: (.65, .10)
+      pos_hint: {'x': 0.15, 'center_y': 0.95}
+      
+#    MDScrollView:
+#      id: scrlv
+#      size_hint: (1, .9)
+#      pos_hint: {'x': 0, 'y': 0.1}
+      
+      #size_hint: (1, .55)
+      #pos_hint: {'x': 0, 'y': 0.35}
+      #root.keyb_height/root.height
+      
+    MDTextField:
+    #TextInput:
+      id: text_area
+      text: ""
+      hint_text: 'Напишите заметку'
+      helper_text_mode: "on_focus"
+      multiline: True
+      use_handles: True
+      size_hint: (1-0.1, 0.8)
+      #size_hint: (1, None)
+      pos_hint: {'x': 0.05, 'y': 0.1}
+      keyboard_suggestions: True
+      input_type: 'text'
+      #height: max( (len(self._lines)+2) * self.line_height, (scrlv.height) )
+      #handle_image_left: 
+      #'atlas://data/images/defaulttheme/selector_middle'
+      #'atlas://data/images/defaulttheme/selector_right'
+      
+      
+      scroll_from_swipe: True
+      #scroll_timeout: 10000
+      #scroll_distance: 10
+      #scroll_y: 10
+      #background_color: (255, 255, 255, 0.1)
+      #foreground_color: (1,1,1,0.9)
+    
+#    MDIconButton:
+#    #MDRaisedButton:
+#    #Button:
+#      id: button_edit
+#      icon: 'pencil-circle'
+#      user_font_size: 100
+#      text: '/'
+#      #size_hint: (.15, .09)
+#      size_hint: (.2, .2)
+#      pos_hint: {"x": .7, "y":0.15}
+#      opacity: 0.9
+#      on_press: root.button_edit_pressed()
+
+
+<FileMenu>:
+  fileMenu : fileMenu
+  id : fileMenu
+  label_app : label_app
+  button_menu : button_menu
+  float: float
+  scroll: scroll
+  grd : grd
+  popup_box: popup_box
+
+  FloatLayout:
+    id: float
+    
+    ScrollView:
+      id: scroll
+      size_hint: (1, 0.9)
+  
+      GridLayout:
+        id: grd
+        size_hint_y: None
+        cols: 1
+        padding: [0, 0, 0, 50]
+        spacing: 1
+        row_force_default: True
+        row_default_height: '60sp'
+    
+    MDIconButton:
+    #MDRaisedButton:
+    #Button:
+      id: button_menu
+      icon: 'menu'
+      #text: '='
+      size_hint: (.15, .09)
+      pos_hint: {"x":0, "y":0.90}
+      on_press: root.manager.current =  'menu_folder'
+  
+    MDLabel:
+      id: label_app
+      text: root.text_for_label
+      halign: 'left'
+      text_size: (600, None)
+      size_hint: (.65, .10)
+      pos_hint: {'x': 0.15, 'center_y': 0.95}
+    
+    MDIconButton:
+    #MDRaisedButton:
+    #Button:
+      id: button_edit
+      icon: "plus-circle"
+      #text: '+'
+      icon_size: '45sp'
+      pos_hint: {"x": .7, "y":0.15}
+      on_release: root.button_plus_pressed()
+
+    PopupFile:
+      id: popup_box
+
+<PopupFile>:
+  box: box
+  box_open: box_open
+  box_delete: box_delete
+  box_close: box_close
+
+  id: box
+  index: 0
+  orientation: 'vertical'
+  size_hint: .5, 0.25
+  pos_hint: {'x': 0.25, 'y': 0.5}
+  opacity: 0
+
+  MDRaisedButton:
+  #Button:
+    id: box_open
+    index: 0
+    text: 'Открыть'
+    size_hint: (1, None)
+    height: '0dp'
+    on_release: root.popup_open()
+
+  MDRaisedButton:
+  #Button:
+    id: box_delete
+    index: 0
+    text: 'Удалить'
+    size_hint: (1, None)
+    height: '0dp'
+    on_release: root.popup_delete()
+
+  MDRaisedButton:
+  #Button:
+    id: box_close
+    index: 0
+    text: 'Закрыть это окно'
+    size_hint: (1, None)
+    height: '0dp'
+    on_press: root.popup_close()
+
+
+<FolderMenu>:
+  label_app : label_app
+  grd : grd
+  float_folder : float_folder
+
+  FloatLayout:
+    id : float_folder
+    
+    ScrollView:
+      size_hint: (1, 0.9)
+      
+      GridLayout:
+        id: grd
+        size_hint_y: None
+        cols: 1
+        padding: [0, 0, 0, 50]
+        spacing: 1
+        row_force_default: True
+        row_default_height: '60sp'
+        
+    MDIconButton:
+    #Button:
+      id: button_menu
+      icon: 'menu'
+      text: '='
+      size_hint: (.15, .09)
+      pos_hint: {"x":0, "y":0.90}
+      on_press: root.redraw_file()
+      # а эта строка не обновляет файлы:
+      #root.manager.current = 'menu_file'
+      
+    MDLabel:
+      id: label_app
+      text: root.text_for_label
+      halign: 'left'
+      text_size: (600, None)
+      size_hint: (.65, .10)
+      pos_hint: {'x': 0.15, 'center_y': 0.95}
+      
+    MDIconButton:
+      id: button_create_folder
+      icon: "plus-circle"
+      icon_size: '45sp'
+      pos_hint: {"x": .7, "y":0.15}
+      on_release: root.create_folder()
+      
+    PopupCreateFolder:
+      id: popup_folder_box
+      
+<PopupCreateFolder>:
+  box_create_folder : box_create_folder
+  text_create_folder : text_create_folder
+  button_ok_create_folder : button_ok_create_folder
+  
+  id: box_create_folder
+  index: 0
+  orientation: 'vertical'
+  size_hint: 0.5, 0.25
+  pos_hint: {'x': 0.25, 'y': 0.5}
+  opacity: 1
+  
+    
+  MDTextField:
+    id: text_create_folder
+    size_hint: (1, 0.25)
+    #height : '0'
+    text: ""
+    hint_text: 'Создать папку'
+    helper_text: 'Введите название'
+    helper_text_mode: "on_focus"
+    #fill_color_normal: (0,1,1,0)
+    #background_color: (0,1,1,1)
+    #text_color_normal: 1,0,1,1
+    mode: "fill"
+    fill_color: 1, 1, 1, 0.1
+    #mode : 'rectangle'
+    multiline: False
+    use_handles: True
+    #opacity: 1
+    
+  MDRaisedButton:
+    id: button_ok_create_folder
+    index: 0
+    text: 'Ок'
+    #md_bg_color: "grey"
+    size_hint: (1, 0.25)
+    #height: '25sp'
+    on_press: root.create_folder_ok()
+    
+  MDRaisedButton:
+    id: button_cancel_create_folder
+    index: 0
+    text: 'Отмена'
+    #md_bg_color: "grey"
+    size_hint: (1, 0.25)
+    #height: '25sp'
+    on_press: root.create_folder_cancel()
