@@ -48,7 +48,7 @@ class MainApp(MDApp):
         print('MainApp init')
         self.title = 'My Notepad'
         self.sm = ScreenManager( transition=NoTransition())
-    def build(self):
+    def build(self): #0
         '''
         Docstring для build
         размещаем на экране список файлов и создаем другие экраны
