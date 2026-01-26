@@ -4,19 +4,20 @@ Docstring для file_menu.
 '''
 import os
 from kivy.uix.screenmanager import Screen
-from kivy.properties import (StringProperty, ObjectProperty, ListProperty)
-import popup as pf
-import multiexpressionbutton as meb
+from kivy.properties import (StringProperty, ObjectProperty, ListProperty) # pylint: disable=import-error,no-name-in-module
 from kivy.graphics import Color, Line
-
 from kivy.clock import Clock
 from kivy.app import App
+import popup as pf
+import multiexpressionbutton as meb
+
 
 file_main = globals()
 file_main = ObjectProperty(None)
 file_popup = globals()
 file_popup = ObjectProperty(None)
 self_file = ObjectProperty(None)
+subdir = os.getcwd()
 #print('from file_menu gettattr:', getattr(self_test, '__name__'))
 
 
@@ -28,7 +29,7 @@ class FileMenu(Screen):
     '''
     print('begin class FileMenu')
 
-    global subdir #self_main, 
+    global subdir #self_main,
     text_for_label = StringProperty("Список заметок")
     files_txt = ListProperty()
     float = ObjectProperty()
@@ -36,13 +37,14 @@ class FileMenu(Screen):
     grd = ObjectProperty()
     button_menu = ObjectProperty(None)
     popup_box = ObjectProperty()
-  
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         global self_popup, self_main, subdir, self_file
         print("File_menu init")
         self_file = globals()
         self_file = self
+        self.button_list_menu = []
         #self_popup = pf
         self.app = App.get_running_app()
         self.send_self_file()
@@ -58,7 +60,7 @@ class FileMenu(Screen):
     def receive_self_popup_in_file_menu(self, self_popup):
         global file_popup
         file_popup = self_popup
-      
+
     def build_file_menu(self): #1
         '''
         Docstring для build_file_menu
@@ -101,10 +103,15 @@ class FileMenu(Screen):
 #  def on_text_for_label(self, *args):
 #    print('label changed')
 
-# Файловая функция
-# читаем файлы в список self.files_txt
-# вызываем из file_list_building
     def func_file_list(self):
+        '''
+        Docstring for func_file_list
+        Файловая функция.
+        читаем файлы в список self.files_txt
+        вызываем из file_list_building
+
+        :param self: Description
+        '''
         global subdir
         subdir = os. getcwd()
         if subdir:
@@ -117,8 +124,13 @@ class FileMenu(Screen):
                 self.files_txt.append(i)
         return self.files_txt
 
-# Включение file_list.
     def file_list_building(self, grd): #2
+        '''
+        Docstring for file_list_building
+        Включение file_list.
+        
+        :param grd: Description
+        '''
         print("file_list_building begin")
         grd.clear_widgets()
         #grd.padding = (10, 10, 10, 10)
@@ -152,17 +164,25 @@ class FileMenu(Screen):
         return self.grd
 
     def shed_label(self, time):
+        '''
+        Docstring for shed_label
+        
+        :param self: Description
+        :param time: Description
+        '''
         print('shed_label begin. time: ', time)
         #self.text_for_label = "Список заметок"
-        if (len(self.files_txt) == 0):
+        if len(self.files_txt) == 0:
         #and (self.back_from_ml == False):
-            self.ids.label_app.text = 'В этой папке заметок нет. Нажми +, чтобы добавить, или = для выбора папки.'
+            self.ids.label_app.text = f'В этой папке заметок нет. Нажми +, чтобы добавить, или = для выбора папки. Текущая папка: {os.getcwd()}'
         else:
             self.ids.label_app.text = f'Список заметок в папке: {os.getcwd()}'
-      
-  # Выключение file_list с экрана
+
     def off_file_list(self):
+        '''
+        Docstring for off_file_list
+        Выключение file_list с экрана.
+        :param self: Description
+        '''
         for i in range(len(self.files_txt)):
             self.grd.remove_widget(self.button_list_menu[i])
-        return
-
