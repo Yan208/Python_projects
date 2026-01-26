@@ -28,7 +28,7 @@ class FileMenu(Screen):
     '''
     print('begin class FileMenu')
 
-    global self_main, subdir
+    global subdir #self_main, 
     text_for_label = StringProperty("Список заметок")
     files_txt = ListProperty()
     float = ObjectProperty()

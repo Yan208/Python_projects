@@ -10,7 +10,7 @@ import sys
 from kivy.config import Config
 from kivy.uix.screenmanager import ScreenManager, NoTransition
 # здесь линтер срабатывает ложно, оставить!
-from kivy.properties import StringProperty, ObjectProperty
+from kivy.properties import StringProperty, ObjectProperty  # pylint: disable=import-error,no-name-in-module
 
 
 if sys.platform.startswith('win'):
@@ -22,11 +22,11 @@ if sys.platform.startswith('android'):
     Config.set('kivy', 'keyboard_mode', '')
 
 # здесь линтер срабатывает ложно, оставить!
-from kivymd.app import MDApp
-import file_menu as fm
-import mainlay as ml
+from kivymd.app import MDApp  # pylint: disable=wrong-import-position
+import file_menu as fm  # pylint: disable=wrong-import-position
+import mainlay as ml  # pylint: disable=wrong-import-position
 #import popup
-import foldermenu
+import foldermenu  # pylint: disable=wrong-import-position
 
 
 #import popup_create_folder as popup_create_folder
@@ -63,7 +63,7 @@ class MainApp(MDApp):
                 os.chdir(path)
         except PermissionError:
             print(f"Нет прав для создания папки '{path}'.")
-        except Exception as e:
+        except Exception as e:  # pylint: disable=broad-exception-caught
             print(f"Произошла ошибка: {e}")
 
     def build(self): #0
