@@ -6,7 +6,7 @@ import os
 from kivy.uix.screenmanager import Screen
 from kivy.properties import (StringProperty, ObjectProperty, ListProperty) # pylint: disable=import-error,no-name-in-module
 from kivy.graphics import Color, Line
-from kivy.clock import Clock
+#from kivy.clock import Clock
 from kivy.app import App
 import popup as pf
 import multiexpressionbutton as meb
@@ -74,7 +74,8 @@ class FileMenu(Screen):
         grd = self_file.file_list_building(grd)
         self_file.grd.bind(minimum_height = self_file.grd.setter('height'))
         self_file.is_popup = True
-        Clock.schedule_once(self_file.shed_label, 3)
+        #Clock.schedule_once(self_file.shed_label, 3)
+        self_file.shed_label()
         print("build_file_menu end!")
 
     def choice_file_main(self, file_list_building):
@@ -163,18 +164,22 @@ class FileMenu(Screen):
         print('Всего файлов', len(self.files_txt))
         return self.grd
 
-    def shed_label(self, time):
+    #def shed_label(self, time):
+    def shed_label(self):
         '''
         Docstring for shed_label
         
         :param self: Description
         :param time: Description
         '''
-        print('shed_label begin. time: ', time)
+        #print('shed_label begin. time: ', time)
+        print('shed_label begin.')
         #self.text_for_label = "Список заметок"
+        label_app = 'В этой папке заметок нет. Нажми +, чтобы добавить, или = для выбора папки.'
         if len(self.files_txt) == 0:
         #and (self.back_from_ml == False):
-            self.ids.label_app.text = f'В этой папке заметок нет. Нажми +, чтобы добавить, или = для выбора папки. Текущая папка: {os.getcwd()}'
+            self.ids.label_app.text = label_app + f'Текущая папка: {os.getcwd()}'
+            #self.ids.label_app.text.add() = 1
         else:
             self.ids.label_app.text = f'Список заметок в папке: {os.getcwd()}'
 

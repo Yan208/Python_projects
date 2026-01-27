@@ -35,7 +35,7 @@ class MainLayout(Screen):
     self.send_self_main()
 
   def send_self_main(self):
-      fm.FileMenu.receive_self_main_in_file_menu(self, self_main)
+      fm.FileMenu.receive_self_main_in_file_menu(self, self_main=self)
   
   
   # в версии 9.0 работает 100%
