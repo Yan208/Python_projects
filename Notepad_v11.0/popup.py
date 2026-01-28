@@ -1,15 +1,24 @@
-from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import (ObjectProperty, BooleanProperty)
-from kivy.clock import Clock
-import file_menu as fm
+'''
+Docstring for Notepad_v11.0.popup
+Включается при долгом нажатии ЛКМ по файлу (заметке).
+меню: открыть, удалить, закрыть.
+'''
 import os
+from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import (ObjectProperty, BooleanProperty) # pylint: disable=import-error,no-name-in-module
+from kivy.clock import Clock
 from kivy.app import App
+import file_menu as fm
+
 
 self_popup = globals()
 self_popup = ObjectProperty(None)
 
 
 class PopupFile(BoxLayout):
+  '''
+  Docstring for PopupFile
+  '''
   print('begin class PopupFile')
   box = ObjectProperty()
   box_open = ObjectProperty()

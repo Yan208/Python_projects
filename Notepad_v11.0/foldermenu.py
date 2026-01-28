@@ -1,10 +1,14 @@
-from kivy.uix.screenmanager import Screen
-from kivy.properties import (StringProperty, ObjectProperty)
-import file_menu as fm
-from kivy.uix.button import Button
+'''
+Docstring for Notepad_v11.0.foldermenu
+
+'''
 import os
-import popup_create_folder as pfolder
+from kivy.uix.screenmanager import Screen
+from kivy.properties import (StringProperty, ObjectProperty) # pylint: disable=import-error,no-name-in-module
+from kivy.uix.button import Button
 from kivy.app import App
+import popup_create_folder as pfolder
+import file_menu as fm
 
 #folder_testapp = globals()
 #folder_testapp = ObjectProperty(None)
@@ -61,9 +65,13 @@ class FolderMenu(Screen):
       self.grd.add_widget(self.button_folder_list_menu[i])
     self.text_for_label = f"Текущая папка: {os.getcwd()}"
     return
-    
-  # читаем список папок в subdir
+
   def func_folder_list(self):
+    '''
+    Docstring for func_folder_list
+    читаем список папок в subdir
+    :param self: Description
+    '''
     #all_list = os.listdir()
     self.folder_list = []
     self.dir_tek = os.getcwd()

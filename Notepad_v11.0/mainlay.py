@@ -24,9 +24,9 @@ class MainLayout(Screen):
   keyb_height = NumericProperty(0)
   
   def __init__(self, **kwargs):
-    super(MainLayout, self).__init__(**kwargs)
+    super().__init__(**kwargs)
     print("MainLayout init")
-    global subdir, file_list_building, self_main
+    global file_list_building, self_main # subdir,
     self_main = globals()
     self_main = self
     self.app = App.get_running_app()

@@ -40,9 +40,9 @@ class FileMenu(Screen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        global self_popup, self_main, subdir, self_file
+        global subdir, self_file #self_popup, self_main,
         print("File_menu init")
-        self_file = globals()
+        #self_file = globals()
         self_file = self
         self.button_list_menu = []
         #self_popup = pf
@@ -51,6 +51,10 @@ class FileMenu(Screen):
         #self.build_file_menu()
 
     def send_self_file(self):
+        '''
+        Docstring for send_self_file
+        Отправка self в popup.py в класс PopupFile.
+        '''
         pf.PopupFile.receive_self_file_menu_in_popup(self, self_file=self)
 
     def receive_self_main_in_file_menu(self, self_main):
@@ -68,7 +72,7 @@ class FileMenu(Screen):
         Создается список файлов (заметок) и выводится на экран.
         После её выполнения приложение ждет действия пользователя.
         '''
-        global subdir, self_main, self_popup, grd, s_man
+        #global subdir, self_main, self_popup, grd, s_man
         print("build_file_menu begin")
         grd = self_file.grd
         grd = self_file.file_list_building(grd)
@@ -95,14 +99,14 @@ class FileMenu(Screen):
         file_main.choice_file_mainlay(file_list_building)
 
     def button_plus_pressed(self):
+        '''
+        Docstring for button_plus_pressed
+        Обработка нажатия кнопки "+". Входим в зону редактирования нового файла.
+        '''
         print("button '+' pressed")
         self.app.sm.current = 'text_area'
         file_main.create_file_building()
         file_main.text_area.focus = True
-
-
-#  def on_text_for_label(self, *args):
-#    print('label changed')
 
     def func_file_list(self):
         '''
@@ -110,8 +114,6 @@ class FileMenu(Screen):
         Файловая функция.
         читаем файлы в список self.files_txt
         вызываем из file_list_building
-
-        :param self: Description
         '''
         global subdir
         subdir = os. getcwd()
@@ -131,6 +133,7 @@ class FileMenu(Screen):
         Включение file_list.
         
         :param grd: Description
+        в kv GridLayout, вложен в ScrollView и FloatLayout
         '''
         print("file_list_building begin")
         grd.clear_widgets()
@@ -168,18 +171,13 @@ class FileMenu(Screen):
     def shed_label(self):
         '''
         Docstring for shed_label
-        
-        :param self: Description
-        :param time: Description
+        Текст помощник в ориентировании.
         '''
-        #print('shed_label begin. time: ', time)
+
         print('shed_label begin.')
-        #self.text_for_label = "Список заметок"
-        label_app = 'В этой папке заметок нет. Нажми +, чтобы добавить, или = для выбора папки.'
         if len(self.files_txt) == 0:
-        #and (self.back_from_ml == False):
+            label_app = 'В этой папке заметок нет. Нажми +, чтобы добавить, или = для выбора папки.'
             self.ids.label_app.text = label_app + f'Текущая папка: {os.getcwd()}'
-            #self.ids.label_app.text.add() = 1
         else:
             self.ids.label_app.text = f'Список заметок в папке: {os.getcwd()}'
 
