@@ -145,6 +145,7 @@ class FileMenu(Screen):
         self.button_list_menu = []
         self.files_txt.sort()
         #for i in range(len(self.files_txt)):
+        print('files_txt: ', self.files_txt)
         for i, file_txt in enumerate(self.files_txt): #- только нужно поменять переменные!
             #print(f'Обработка файла {i}:', str(file_txt))
             self.button_list_menu.append(i)

@@ -1,13 +1,16 @@
-from kivy.uix.screenmanager import Screen
-from kivy.properties import (StringProperty, ObjectProperty, NumericProperty)
-import file_menu as fm
-
-from kivy.core.window import Window
+'''
+Docstring for Notepad_v11.0.mainlay
+Действия для вывода редактора файла.
+'''
 import os
+from kivy.app import App
+from kivy.uix.screenmanager import Screen
+from kivy.properties import (StringProperty, ObjectProperty, NumericProperty) # pylint: disable=import-error,no-name-in-module
+from kivy.core.window import Window
 from kivy.utils import platform
 #if platform == 'android':
 #from jnius import autoclass
-from kivy.app import App
+import file_menu as fm
 
 self_main = ObjectProperty(None)
 
