@@ -50,6 +50,13 @@ class MainApp(MDApp):
         print('MainApp init')
         self.title = 'My Notepad'
         self.sm = ScreenManager( transition=NoTransition())
+        self._setup_notes_directory()
+
+    def _setup_notes_directory(self):
+        '''
+        Docstring для _setup_notes_directory
+        Создает папку Notes и переходит в нее.
+        '''
         path = "Notes"  # имя папки (в текущей директории)
         try:
             if not os.path.exists("Notes"):

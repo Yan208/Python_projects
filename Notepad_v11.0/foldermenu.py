@@ -36,6 +36,8 @@ class FolderMenu(Screen):
         self.send_folder_menu()
         self.build_folder_menu()
         self.folder_list = []
+        self.button_folder_list_menu = []
+        #self.subdir
 
     def send_folder_menu(self):
         pfolder.PopupCreateFolder.receive_self_folder_menu_in_popup_cr_folder(self, self_folder=self)

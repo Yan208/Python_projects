@@ -16,6 +16,10 @@ self_main = ObjectProperty(None)
 
 
 class MainLayout(Screen):
+  '''
+  Docstring for MainLayout
+  Для отображения редактора файла.
+  '''
   print('begin class MainLayout')
   float = ObjectProperty(None)
   text_for_label = StringProperty("Текущий файл")
@@ -72,28 +76,40 @@ class MainLayout(Screen):
     fm.self_file.build_file_menu()
     self.app.sm.current = 'menu_file'
 
-  # Отключение text_area с экрана.
   def off_text_area(self):
+    '''
+    Docstring for off_text_area
+    Отключение text_area с экрана.
+    '''
     self.save_file()
     self.ids.text_area.remove_widget(self.text_area)
   
-    # Отключение create_file с экрана
+
   def create_file_off(self):
+    '''
+    Docstring for create_file_off
+    Отключение create_file с экрана    
+    '''
     self.save_file()
     self.ids.text_area.remove_widget(self.text_area)
-    return
-    
-  # Включение виджетов create_file
+
   def create_file_building(self):
+    '''
+    Docstring for create_file_building
+    Включение виджетов create_file
+    '''
     self.text_for_label = "Новая заметка"
     self.text_area.text = ""
     if platform == 'android':
       self.text_area.bind(keyboard=self.on_keyb)
       self.text_area.bind(focus=self.off_keyb)
-    return
   
-  # прочесть текущий файл в объект text_area. вызываем из choice_file()
+
   def open_in_area(self):
+    '''
+    Docstring for open_in_area
+    прочесть текущий файл в объект text_area. вызываем из choice_file()    
+    '''
     if os.path.isfile(self.file_name):
       try:
         with open(self.file_name, 'r', encoding='utf-8') as file:
@@ -108,12 +124,14 @@ class MainLayout(Screen):
     if platform == 'android':
       self.text_area.bind(keyboard=self.on_keyb)
       self.text_area.bind(focus=self.off_keyb)
-    return
-  
-  # Файловая функция
-  # сохраняем из text_area в текущий файл
-  # вызывается из back_to_file и on_stop при условии, что self.is_text_area = True
+
   def save_file(self):
+    '''
+    Docstring for save_file
+    # Файловая функция
+    # сохраняем из text_area в текущий файл
+    # вызывается из back_to_file и on_stop при условии, что self.is_text_area = True
+    '''
     print('save_file begin')
     index_of_cr = self.text_area.text.find("\n")
     if index_of_cr == -1:
@@ -135,8 +153,7 @@ class MainLayout(Screen):
     finally:
       print("попытка сохранения окончена")
     print("save_file end")
-    return
-  
+
   # Файловая функция. Выбрали файлик и открываем его в объекте self.text_area
   # вызываем из on_file_list
   def choice_file(self, file_list_building):
